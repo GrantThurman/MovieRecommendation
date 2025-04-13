@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#A27B5C"  # Brown
+backgroundColor = "#2C3930"  # Dark background
+secondaryBackgroundColor = "#3F4F44"  # Sidebar color
+textColor = "#DCD7C9"  # White text
+font = "futura"
