@@ -10,7 +10,7 @@ import streamlit as st
 import pandas as pd
 
 from app.data_loader import load_movie_data
-from app.recommender import verify_movie, recommend_movies
+from app.recommender import verify_title, recommend_movies
 from app.utils import setup_annoy_index
 
 # Load data and index
@@ -34,7 +34,7 @@ st.markdown("Enter a movie title to get recommendations!")
 
 movie_input = st.text_input("Movie Title: ").lower().strip()
 if movie_input:
-    movie_matches = verify_movie(movie_input, movie_data)
+    movie_matches = verify_title(movie_input, movie_data)
 
     if movie_matches is None:
         st.write("Movie not found!")

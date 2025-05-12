@@ -25,7 +25,7 @@ def load_movie_data():
 
 
 def load_netflix_data():
-    netflix = pd.read_csv("netflix_titles.csv", encoding="ISO-8859-1")
+    netflix = pd.read_csv("data/netflix_titles.csv", encoding="ISO-8859-1")
     ## Clean
     netflix = netflix.iloc[:, 0:12]  # Keep relevant columns
     # Rename columns to match previous dataset
