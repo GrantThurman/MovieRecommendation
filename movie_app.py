@@ -40,8 +40,11 @@ if movie_input:
         st.write("Movie not found!")
     elif isinstance(movie_matches, pd.Series):  # Single match
         recommendations = recommend_movies(movie_matches["movie_id"], movie_data, annoy_index, movie_ids, amount=10)
-        st.write("Movies similar to", movie_matches["title"])
-        st.write(recommendations)
+        st.write("Movies similar to", movie_matches["title"], ":")
+        recommendations = recommendations[["title", "genres"]].reset_index(drop=True)
+        recommendations.columns = [col.capitalize() for col in recommendations.columns]
+        recommendations.index += 1  # start numbering at 1
+        st.table(recommendations)
     else:  # Multiple matches
         selected_movie = st.selectbox(
             "Multiple movies found. Please choose one:",
@@ -50,5 +53,8 @@ if movie_input:
         )
         selected_movie_data = movie_matches[movie_matches["title"] == selected_movie].iloc[0]
         recommendations = recommend_movies(selected_movie_data["movie_id"], movie_data, annoy_index, movie_ids, amount=10)
-        st.write("Movies similar to", selected_movie)
-        st.write(recommendations)
+        st.write("Movies similar to", selected_movie, ":")
+        recommendations = recommendations[["title", "genres"]].reset_index(drop=True)
+        recommendations.columns = [col.capitalize() for col in recommendations.columns]
+        recommendations.index += 1  # start numbering at 1
+        st.table(recommendations)
