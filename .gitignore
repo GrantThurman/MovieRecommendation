@@ -8,3 +8,6 @@ data/
 __pycache__/
 *.pyc
 .env
+
+# Other
+.DS_Store
