@@ -34,7 +34,7 @@ st.markdown("Enter a movie title to get recommendations!")
 
 movie_input = st.text_input("Movie Title: ").lower().strip()
 if movie_input:
-    movie_matches = verify_title(movie_input, movie_data)
+    movie_matches = verify_title(movie_input, movie_data, "clean_title")
 
     if movie_matches is None:
         st.write("Movie not found!")

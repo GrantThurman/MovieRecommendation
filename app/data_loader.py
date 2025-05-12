@@ -34,6 +34,7 @@ def load_netflix_data():
     netflix["year"] = pd.to_numeric(netflix["year"], errors="coerce")  # Convert to numeric
     netflix["genres"] = netflix["genres"].str.lower().str.replace(" ", "_")  # Normalize genre formatting
     netflix["show_id"] = netflix["show_id"].str[1:].astype(int) # Convert IDs to integers
+    netflix["clean_title"] = netflix.title.str.lower().str.strip()
     # Create a combined text feature column
     netflix["text_features"] = netflix["title"] + " " + netflix["genres"] + " " + netflix["description"]
 
