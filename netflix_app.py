@@ -25,10 +25,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h1 color: 18230F> 🎬 Netflix Recommendation System </h1>", unsafe_allow_html=True)
+st.markdown("<h1 color: 18230F> Netflix Recommendation System </h1>", unsafe_allow_html=True)
 st.markdown("Enter a title to get recommendations!")
 
 title_input = st.text_input("Title: ").lower().strip()
+title_id = verify_title(title_input, netflix_data, "clean_title")
 
-recommendations = recommend_movies(verify_title(title_input, netflix_data, "clean_title"), netflix_data, annoy_index, netflix_ids, amount=5)
+recommendations = recommend_movies(title_id,netflix_data, annoy_index, netflix_ids, amount=5)
 st.table(recommendations)
