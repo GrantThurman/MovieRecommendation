@@ -1,8 +1,20 @@
 import pandas as pd
+import gdown
+import os
+
+def download_file(url, output_path):
+    if not os.path.exists(output_path):
+        gdown.download(url, output_path, quiet=False)
 
 def load_movie_data():
     movies = pd.read_csv("data/movies.csv")
-    ratings = pd.read_csv("data/ratings.csv")
+
+    ratings_file_id = "1fdOPg1fk2ldRloznZkhQ-lzAOW86AQ7v"
+    ratings_url = f"https://drive.google.com/file/d/{ratings_file_id}/view?usp=share_link"
+    ratings_output_path = "data/ratings.csv"
+    download_file(ratings_url, ratings_output_path)
+
+    ratings = pd.read_csv(ratings_output_path)
 
     movies["year"] = movies["title"].str.extract(r"\((\d{4})\)\s*$")
     movies["year"] = pd.to_numeric(movies["year"], errors="coerce")
@@ -25,7 +37,12 @@ def load_movie_data():
 
 
 def load_netflix_data():
-    netflix = pd.read_csv("data/netflix_titles.csv", encoding="ISO-8859-1")
+    netflix_file_id = "1Qw5RhCshBus1qthFGdWCvF4JeZbT4jvr"
+    url = "https://drive.google.com/file/d/{netflix_file_id}/view?usp=share_link"
+    output_path = "data/netflix_titles.csv"
+    download_file(url, output_path)
+
+    netflix = pd.read_csv(output_path, encoding="ISO-8859-1")
     ## Clean
     netflix = netflix.iloc[:, 0:12]  # Keep relevant columns
     # Rename columns to match previous dataset

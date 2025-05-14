@@ -1,8 +1,6 @@
-# Ignore large files/folders
-models/
-data/
-*.csv
-*.ann
+# Large data/model files stored externally
+data/ratings.csv
+models/netflix_index.ann
 
 # Python stuff
 __pycache__/
