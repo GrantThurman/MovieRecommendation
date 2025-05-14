@@ -15,6 +15,8 @@ def load_movie_data():
     movies["year"] = movies["title"].str.extract(r"\((\d{4})\)\s*$")
     movies["year"] = pd.to_numeric(movies["year"], errors="coerce")
     movies = movies.dropna(subset=["year"])  # remove rows with no year
+    movies = movies.reset_index(drop=True)
+    
     movies["clean_title"] = movies.title.str.lower().str.split("(", n=1).str[0].str.strip()
     movies.genres = movies.genres.str.replace("|", ", ")
 
