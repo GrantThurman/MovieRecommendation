@@ -21,9 +21,6 @@ def load_movie_data():
     movies["genres"] = movies["genres"].astype("category")
 
     movie_ids = movies["movie_id"].tolist()
-    
-    movies = movies.reset_index(drop=True)
-
     return movies, movie_ids
 
 
