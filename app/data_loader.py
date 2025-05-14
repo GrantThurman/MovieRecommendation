@@ -10,7 +10,7 @@ def load_movie_data():
     movies = pd.read_csv("data/movies.csv")
 
     ratings_file_id = "1fdOPg1fk2ldRloznZkhQ-lzAOW86AQ7v"
-    ratings_url = f"https://drive.google.com/file/d/{ratings_file_id}/view?usp=share_link"
+    ratings_url = f"https://drive.google.com/uc?id={ratings_file_id}"
     ratings_output_path = "data/ratings.csv"
     download_file(ratings_url, ratings_output_path)
 
@@ -38,7 +38,7 @@ def load_movie_data():
 
 def load_netflix_data():
     netflix_file_id = "1Qw5RhCshBus1qthFGdWCvF4JeZbT4jvr"
-    url = "https://drive.google.com/file/d/{netflix_file_id}/view?usp=share_link"
+    url = f"https://drive.google.com/uc?id={netflix_file_id}"
     output_path = "data/netflix_titles.csv"
     download_file(url, output_path)
 
