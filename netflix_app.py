@@ -31,5 +31,6 @@ st.markdown("Enter a title to get recommendations!")
 title_input = st.text_input("Title: ").lower().strip()
 title_id = verify_title(title_input, netflix_data, "clean_title")
 
-recommendations = recommend_movies(title_id,netflix_data, annoy_index, netflix_ids, amount=5)
-st.table(recommendations)
+if title_id is not None:
+    recommendations = recommend_movies(title_id["show_id"], netflix_data, annoy_index, netflix_ids, amount=5)
+    st.table(recommendations)
