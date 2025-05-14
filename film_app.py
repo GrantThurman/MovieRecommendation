@@ -15,7 +15,7 @@ from app.utils import setup_annoy_index
 
 # Load data and index
 movie_data, movie_ids = load_movie_data()
-movie_annoy_index = setup_annoy_index(movie_data, "models/movie_index.ann", "genres", rebuild=True)
+movie_annoy_index = setup_annoy_index(movie_data, "models/movie_index.ann", "genres", rebuild=False)
 
 netflix_data, netflix_ids = load_netflix_data()
 netflix_annoy_index = setup_annoy_index(netflix_data, "models/netflix_index.ann", "text_features", rebuild=False)
