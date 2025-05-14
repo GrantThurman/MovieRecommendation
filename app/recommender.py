@@ -5,7 +5,7 @@ def verify_title(title_input, data, col):
     elif len(matches) == 1:
         return matches.iloc[0]
     else:
-        return matches.drop_duplicates(subset=["title_id"])
+        return matches.drop_duplicates(subset=["movie_id"])
 
 def get_similar_titles(title_id, data, annoy_index, title_ids, n=5):
     # Ensure title_id is in the title_ids list

@@ -62,11 +62,13 @@ if movie_input:
         )
         selected_movie_data = movie_matches[movie_matches["title"] == selected_movie].iloc[0]
         recommendations = recommend_movies(selected_movie_data["movie_id"], movie_data, movie_annoy_index, movie_ids, amount=10)
-        tab1.write("Movies similar to", selected_movie, ":")
+        tab1.write(f"Movies similar to {selected_movie}:")
         recommendations = recommendations[["title", "genres"]].reset_index(drop=True)
         recommendations.columns = [col.capitalize() for col in recommendations.columns]
         recommendations.index += 1  # start numbering at 1
         tab1.table(recommendations)
+
+
 
 # Tab 2
 tab2.markdown("Enter a Netflix title to get recommendations!")
