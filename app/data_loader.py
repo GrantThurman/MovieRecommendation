@@ -3,6 +3,7 @@ import gdown
 import os
 
 def download_file(url, output_path):
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)  # ensure folder exists
     if not os.path.exists(output_path):
         gdown.download(url, output_path, quiet=False)
 
