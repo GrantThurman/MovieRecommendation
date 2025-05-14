@@ -11,22 +11,19 @@ def load_movie_data():
     movies = pd.read_csv("data/movies.csv")
 
     movies.rename(columns={"movieId": "movie_id"}, inplace=True)
-
     movies["year"] = movies["title"].str.extract(r"\((\d{4})\)\s*$")
     movies["year"] = pd.to_numeric(movies["year"], errors="coerce")
-    movies = movies.dropna(subset=["year"])  # remove rows with no year
-    movies = movies.reset_index(drop=True)
-    
     movies["clean_title"] = movies.title.str.lower().str.split("(", n=1).str[0].str.strip()
     movies.genres = movies.genres.str.replace("|", ", ")
 
     # Casting to smaller types
     movies["movie_id"] = movies["movie_id"].astype("int32")
-    movies["year"] = movies["year"].astype("int32")
     movies["genres"] = movies["genres"].astype("category")
 
     movie_ids = movies["movie_id"].tolist()
     
+    movies = movies.reset_index(drop=True)
+
     return movies, movie_ids
 
 

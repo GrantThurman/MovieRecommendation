@@ -3,7 +3,7 @@ import os
 from sklearn.feature_extraction.text import TfidfVectorizer
 from annoy import AnnoyIndex
 
-def setup_annoy_index(data, index_path, feature): # "what to use for matrix"
+def setup_annoy_index(data, index_path, feature):
     tfidf = TfidfVectorizer(stop_words="english")
     tfidf_matrix = tfidf.fit_transform(data[feature])
     tfidf_dense = tfidf_matrix.toarray()
