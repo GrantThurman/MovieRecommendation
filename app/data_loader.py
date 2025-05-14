@@ -10,27 +10,18 @@ def download_file(url, output_path):
 def load_movie_data():
     movies = pd.read_csv("data/movies.csv")
 
-    ratings_file_id = "1fdOPg1fk2ldRloznZkhQ-lzAOW86AQ7v"
-    ratings_url = f"https://drive.google.com/uc?id={ratings_file_id}"
-    ratings_output_path = "data/ratings.csv"
-    download_file(ratings_url, ratings_output_path)
-
-    ratings = pd.read_csv(ratings_output_path, on_bad_lines='skip')
+    movies.rename(columns={"movieId": "movie_id"}, inplace=True)
 
     movies["year"] = movies["title"].str.extract(r"\((\d{4})\)\s*$")
     movies["year"] = pd.to_numeric(movies["year"], errors="coerce")
+    movies = movies.dropna(subset=["year"])  # remove rows with no year
     movies["clean_title"] = movies.title.str.lower().str.split("(", n=1).str[0].str.strip()
     movies.genres = movies.genres.str.replace("|", ", ")
-
-    avg_ratings = ratings.groupby("movieId")["rating"].mean().reset_index()
-    movies = movies.merge(avg_ratings, how="left", on="movieId")[movies["year"] > 1950]
-    movies.rename(columns={"rating": "average_rating", "movieId": "movie_id"}, inplace=True)
 
     # Casting to smaller types
     movies["movie_id"] = movies["movie_id"].astype("int32")
     movies["year"] = movies["year"].astype("int32")
     movies["genres"] = movies["genres"].astype("category")
-    movies["average_rating"] = pd.to_numeric(movies["average_rating"], downcast="float")
 
     movie_ids = movies["movie_id"].tolist()
     
