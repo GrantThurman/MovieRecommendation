@@ -15,7 +15,7 @@ def load_movie_data():
     ratings_output_path = "data/ratings.csv"
     download_file(ratings_url, ratings_output_path)
 
-    ratings = pd.read_csv(ratings_output_path)
+    ratings = pd.read_csv(ratings_output_path, on_bad_lines='skip')
 
     movies["year"] = movies["title"].str.extract(r"\((\d{4})\)\s*$")
     movies["year"] = pd.to_numeric(movies["year"], errors="coerce")
@@ -43,7 +43,7 @@ def load_netflix_data():
     output_path = "data/netflix_titles.csv"
     download_file(url, output_path)
 
-    netflix = pd.read_csv(output_path, encoding="ISO-8859-1")
+    netflix = pd.read_csv(output_path, on_bad_lines='skip', encoding="ISO-8859-1")
     ## Clean
     netflix = netflix.iloc[:, 0:12]  # Keep relevant columns
     # Rename columns to match previous dataset
