@@ -18,4 +18,4 @@ def get_similar_titles(title_id, data, annoy_index, title_ids, n=5):
 
 def recommend_movies(title_id, data, annoy_index, title_ids, amount):
     recommended = get_similar_titles(title_id, data, annoy_index, title_ids, amount)
-    return recommended[["title", "genres"]].reset_index(drop=True)
+    return recommended
